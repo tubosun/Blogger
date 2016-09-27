@@ -1,11 +1,21 @@
 <h2><%= @articles.title %></h2>
+
 <p>Tags:
 	<% @articles.tags.each do |tag| %>
 	<%= link_to tag.name, tag_path(tag)%>
 	<%end%>
 </p>
+
+<p>
+	<% if @articles.image.exists?%>
+		<%= image_tag @articles.image.url%>
+	<%end%>
+</p>
+
 <p><%= @articles.body %></p>
+
 <h3>Comments (<%=@articles.comments.size%>)</h3>
+
 <%= render partial: "articles/comment", collection:@articles.comments%>
 <%= render partial: "comments/form"%>
 <%= link_to "<< Back to Articles", articles_path %>
